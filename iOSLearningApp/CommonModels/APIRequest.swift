@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct APIRequest: Codable{
+struct APIRequest: Decodable{
     let id: Double?
     let title: String?
     var user: User?

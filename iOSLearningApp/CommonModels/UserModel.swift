@@ -9,7 +9,7 @@ import Foundation
 
 import UIKit
 
-struct User: Codable {
+struct User: Decodable {
     let id: Double?
     let login: String?
     let type: String?
