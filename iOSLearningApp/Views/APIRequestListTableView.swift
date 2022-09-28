@@ -55,6 +55,7 @@ private extension APIRequestListTableView{
         self.addSubview(usersListcontainerView)
         usersListcontainerView.backgroundColor = .white
         usersListcontainerView.layer.cornerRadius = ThemeConstants.CORNER_RADIUS
+        usersListcontainerView.layer.borderWidth = 1
         usersListcontainerView.snp.makeConstraints({
             make in
             make.top.bottom.trailing.leading.equalToSuperview().inset(ThemeConstants.MARGIN)
@@ -70,6 +71,8 @@ private extension APIRequestListTableView{
             make.leading.equalToSuperview().offset(ThemeConstants.MARGIN)
             make.width.height.equalTo(ThemeConstants.IMAGE_WIDTH)
             make.centerY.equalToSuperview()
+            make.bottomMargin.lessThanOrEqualToSuperview().offset(-1*ThemeConstants.MARGIN)
+            make.bottom.lessThanOrEqualToSuperview().priority(.required)
         })
     }
     
@@ -102,12 +105,14 @@ private extension APIRequestListTableView{
         usersListcontentLabel.font = UIFont.systemFont(ofSize: ThemeConstants.PRIMARY_FONT_SIZE)
         usersListtitleLabel.textColor = .black
         usersListcontentLabel.numberOfLines = 0
+        //usersListcontentLabel.layer.borderWidth = 1
         usersListcontentLabel.snp.makeConstraints({
             make in
             make.leading.equalTo(usersListprofileImageView.snp.trailing).offset(ThemeConstants.MARGIN)
             make.top.equalTo(usersListsubtitleLabel.snp.bottom).offset(ThemeConstants.MARGIN)
-            make.trailing.bottom.equalToSuperview().offset(-1*ThemeConstants.MARGIN)
+            make.trailing.equalToSuperview().offset(-1*ThemeConstants.MARGIN)
             make.height.greaterThanOrEqualTo(-1*ThemeConstants.MARGIN)
+            make.bottom.equalToSuperview().priority(.low)
         })
     }
 }
