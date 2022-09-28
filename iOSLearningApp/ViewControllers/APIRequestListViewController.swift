@@ -30,9 +30,12 @@ class APIRequestListViewController : UIViewController {
         setupMainActivityIndicator()
         navigationController?.navigationBar.isTranslucent = false
         self.title = ThemeConstants.TABLE_VIEW_TITLE
-        self.navigationController?.navigationBar.backgroundColor = ThemeConstants.PRIMARY_COLOR
+        self.navigationController?.navigationBar.backgroundColor = .gray
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.layer.cornerRadius = ThemeConstants.CORNER_RADIUS
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         requestViewModel.APIRequestView = self
-        requestViewModel.APIRequestListViewModelviewDidLoad()
+        requestViewModel.viewDidLoad()
     }
     
     func setupMainActivityIndicator(){
@@ -91,7 +94,7 @@ extension APIRequestListViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if(indexPath.row < requestResponse.count){
-            let cell = requestListTableView.dequeueReusableCell(withIdentifier: "RequestListTableView", for: indexPath) as! APIRequestListTableView
+            let cell = requestListTableView.dequeueReusableCell(withIdentifier: "APIRequestListTableView", for: indexPath) as! APIRequestListTableView
             let item = requestResponse[indexPath.row]
             cell.setData(item: item)
             return cell

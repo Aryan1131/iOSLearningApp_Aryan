@@ -53,7 +53,7 @@ private extension APIRequestListTableView{
     
     func SetUpusersListcontainerView(){
         self.addSubview(usersListcontainerView)
-        usersListcontainerView.backgroundColor = ThemeConstants.PRIMARY_COLOR
+        usersListcontainerView.backgroundColor = .white
         usersListcontainerView.layer.cornerRadius = ThemeConstants.CORNER_RADIUS
         usersListcontainerView.snp.makeConstraints({
             make in
@@ -63,7 +63,7 @@ private extension APIRequestListTableView{
     
     func SetUpusersListprofileImageView(){
         usersListcontainerView.addSubview(usersListprofileImageView)
-        usersListprofileImageView.layer.cornerRadius = ThemeConstants.IMAGE_WIDTH
+        usersListprofileImageView.layer.cornerRadius = ThemeConstants.IMAGE_WIDTH/2
         usersListprofileImageView.clipsToBounds = true
         usersListprofileImageView.snp.makeConstraints({
             make in
@@ -73,39 +73,41 @@ private extension APIRequestListTableView{
         })
     }
     
-    
     func SetUpusersListtitleLabel(){
         usersListcontainerView.addSubview(usersListtitleLabel)
+        usersListcontainerView.backgroundColor = .white
         usersListtitleLabel.snp.makeConstraints({
             make in
             make.leading.equalTo(usersListprofileImageView.snp.trailing).offset(ThemeConstants.MARGIN)
-            make.trailing.lessThanOrEqualToSuperview().offset(ThemeConstants.MARGIN)
+            make.trailing.lessThanOrEqualToSuperview().offset(-1*ThemeConstants.MARGIN)
             make.top.equalToSuperview().offset(ThemeConstants.MARGIN)
         })
     }
-    
     
     func SetUpusersListsubtitleLabel(){
         usersListcontainerView.addSubview(usersListsubtitleLabel)
         usersListsubtitleLabel.font = UIFont.systemFont(ofSize: ThemeConstants.SUBTITLE_FONT_SIZE)
         usersListsubtitleLabel.numberOfLines = 0
-        usersListsubtitleLabel.textColor = .black
+        usersListsubtitleLabel.textColor = .blue
         usersListsubtitleLabel.snp.makeConstraints({
             make in
             make.leading.equalTo(usersListprofileImageView.snp.trailing).offset(ThemeConstants.MARGIN)
-            make.trailing.equalToSuperview().offset(ThemeConstants.MARGIN)
+            make.trailing.equalToSuperview().offset(-1*ThemeConstants.MARGIN)
             make.top.equalTo(usersListtitleLabel.snp.bottom).offset(ThemeConstants.MARGIN)
         })
     }
-    
-    
+    // user top label
     func SetUpusersListcontentLabel(){
         usersListcontainerView.addSubview(usersListcontentLabel)
-        usersListcontentLabel.font = UIFont.systemFont(ofSize: ThemeConstants.MARGIN)
+        usersListcontentLabel.font = UIFont.systemFont(ofSize: ThemeConstants.PRIMARY_FONT_SIZE)
+        usersListtitleLabel.textColor = .black
         usersListcontentLabel.numberOfLines = 0
         usersListcontentLabel.snp.makeConstraints({
             make in
-            make.leading.equalTo(usersListprofileImageView)
+            make.leading.equalTo(usersListprofileImageView.snp.trailing).offset(ThemeConstants.MARGIN)
+            make.top.equalTo(usersListsubtitleLabel.snp.bottom).offset(ThemeConstants.MARGIN)
+            make.trailing.bottom.equalToSuperview().offset(-1*ThemeConstants.MARGIN)
+            make.height.greaterThanOrEqualTo(-1*ThemeConstants.MARGIN)
         })
     }
 }

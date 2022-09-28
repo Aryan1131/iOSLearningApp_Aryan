@@ -24,7 +24,7 @@ class UserDetailsViewCell : UITableViewCell{
     let valueLabel = UILabel()
     
     func configureUserDetailsViewCell() {
-        self.backgroundColor = ThemeConstants.PRIMARY_COLOR
+        self.backgroundColor = .white
         setupKeyLabel()
         setupValueLabel()
     }
@@ -37,11 +37,12 @@ class UserDetailsViewCell : UITableViewCell{
 private extension UserDetailsViewCell{
     func setupKeyLabel(){
         self.contentView.addSubview(keyLabel)
-        keyLabel.backgroundColor = ThemeConstants.PRIMARY_BG_COLOR
+        keyLabel.backgroundColor = .white
         keyLabel.snp.makeConstraints({
             make in
-            make.top.bottom.equalToSuperview()
+            make.top.bottom.equalToSuperview().inset(ThemeConstants.MARGIN/2)
             make.leading.equalToSuperview().inset(ThemeConstants.MARGIN)
+            make.trailing.equalToSuperview().inset(-1*ThemeConstants.MARGIN)
         })
     }
     
@@ -51,6 +52,7 @@ private extension UserDetailsViewCell{
             make in
             make.top.bottom.equalToSuperview()
             make.trailing.equalToSuperview().inset(ThemeConstants.MARGIN)
+            make.trailing.equalToSuperview().inset(-1*ThemeConstants.MARGIN)
         })
     }
 }

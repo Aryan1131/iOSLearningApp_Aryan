@@ -13,7 +13,7 @@ class APIRequestListViewModel{
     var APIRequestResponse: [APIRequest] = []
     var PageNumber = 1
     
-    func APIRequestListViewModelviewDidLoad(){
+    func viewDidLoad(){
         APIRequestView?.showLoader(true)
         NetworkManager.shared.fetchData(APIPullRequest(PageNumber: PageNumber), completionHandler: {
             (apiRequestData: [APIRequest]) in

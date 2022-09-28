@@ -24,7 +24,7 @@ class ProfileImageTableViewCell: UITableViewCell {
 
     func configure() {
         self.backgroundColor = .lightGray
-        profileImageView.layer.cornerRadius = ThemeConstants.IMAGE_WIDTH
+        profileImageView.layer.cornerRadius = ThemeConstants.IMAGE_WIDTH/2
         profileImageView.clipsToBounds = true
         profileImageView.backgroundColor = .blue
         self.contentView.addSubview(profileImageView)

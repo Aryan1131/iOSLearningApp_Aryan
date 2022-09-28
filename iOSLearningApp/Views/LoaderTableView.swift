@@ -22,7 +22,7 @@ class LoaderTableViewCell: UITableViewCell {
     private var activityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
 
     private func configureLoaderTableViewCell () {
-        self.backgroundColor = .lightGray
+        self.backgroundColor = .gray
         activityIndicatorView.color = ThemeConstants.PRIMARY_COLOR
         self.addSubview(activityIndicatorView)
         activityIndicatorView.snp.makeConstraints({

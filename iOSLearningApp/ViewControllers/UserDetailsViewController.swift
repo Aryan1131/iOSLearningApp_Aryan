@@ -34,12 +34,14 @@ class UserDetailsViewController: UIViewController {
             return
         }
         userDetailsViewModel.viewDidLoad(user: userDetails)
-        func setupMainActivityIndicatorView(){
-            mainActivityIndicator.snp.makeConstraints({
-                make in
-                make.top.bottom.leading.trailing.equalToSuperview()
-            })
-        }
+        
+    }
+    func setupMainActivityIndicatorView(){
+        view.addSubview(mainActivityIndicator)
+        mainActivityIndicator.snp.makeConstraints({
+            make in
+            make.top.bottom.leading.trailing.equalToSuperview()
+        })
     }
 }
 
@@ -89,7 +91,7 @@ extension UserDetailsViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if(indexPath.row != 0) {
-            let cell = userDetailsTableView.dequeueReusableCell(withIdentifier: "UserDetailTableViewCell", for: indexPath) as! UserDetailsViewCell
+            let cell = userDetailsTableView.dequeueReusableCell(withIdentifier: "UserDetailsTableViewCell", for: indexPath) as! UserDetailsViewCell
             print(userDetailsList)
             let data: cellModel = userDetailsList[indexPath.row]
             cell.setDataUserDetailsViewCell(key: data.leftLabel, value: data.rightLabel)
