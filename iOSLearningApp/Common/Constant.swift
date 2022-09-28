@@ -38,9 +38,19 @@ struct ThemeConstants {
     static var TITLE_FONT_SIZE:CGFloat=16
     static var SUBTITLE_FONT_SIZE:CGFloat=10
     static var TABLE_VIEW_TITLE="API Requests"
+    
 }
 
 
 struct UserDetailConstants {
     static var DETAIL_COUNT = 6
+}
+
+func Favourites(){
+    //let shared = Favourites()
+    
+    func getKeyForFavourites(userdId: String)->String {
+        return "favProfile\(userdId)"
+    }
+    
 }

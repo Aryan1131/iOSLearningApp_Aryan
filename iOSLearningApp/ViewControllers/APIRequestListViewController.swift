@@ -46,6 +46,7 @@ class APIRequestListViewController : UIViewController {
             make.top.bottom.trailing.leading.equalToSuperview()
         })
     }
+    
 }
 extension APIRequestListViewController: CommonViewLoadModel{
     func showLoader(_ show: Bool) {

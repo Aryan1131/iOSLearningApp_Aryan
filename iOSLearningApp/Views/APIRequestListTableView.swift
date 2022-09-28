@@ -23,6 +23,9 @@ class APIRequestListTableView : UITableViewCell{
     private let usersListprofileImageView = UIImageView()
     private let usersListcontentLabel = UILabel()
     private let usersListcontainerView = UIView()
+    let userFavButton = UIButton()
+    
+    
     
     func UserListConfigure(){
         self.backgroundColor = .gray
@@ -31,6 +34,7 @@ class APIRequestListTableView : UITableViewCell{
         SetUpusersListtitleLabel()
         SetUpusersListsubtitleLabel()
         SetUpusersListcontentLabel()
+        FavButton()
         
     }
     
@@ -74,6 +78,16 @@ private extension APIRequestListTableView{
             make.bottomMargin.lessThanOrEqualToSuperview().offset(-1*ThemeConstants.MARGIN)
             make.bottom.lessThanOrEqualToSuperview().priority(.required)
         })
+    }
+    func FavButton(){
+        usersListcontainerView.addSubview(userFavButton)
+        userFavButton.setImage(UIImage(systemName: "star"), for: .normal)
+        userFavButton.snp.makeConstraints({
+            make in
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-1*ThemeConstants.MARGIN)
+        })
+        userFavButton.setContentCompressionResistancePriority(.required, for: .horizontal)
     }
     
     func SetUpusersListtitleLabel(){

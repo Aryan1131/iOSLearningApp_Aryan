@@ -1,4 +1,3 @@
-//
 //  UserDetailsViewModel.swift
 //  iOSLearningApp
 //
@@ -63,4 +62,3 @@ class UserDetailsViewModel {
         }
     }
 }
-

@@ -9,7 +9,7 @@ import Foundation
 
 import UIKit
 
-struct User: Decodable {
+struct User: Decodable, Encodable {
     let id: Double?
     let login: String?
     let type: String?
