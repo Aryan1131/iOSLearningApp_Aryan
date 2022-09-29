@@ -10,9 +10,9 @@
 import Foundation
 import UIKit
 
-class NetworkManager {
+public class NetworkManager {
     static let shared = NetworkManager()
-    private init() {}
+    init() {}
     
     func fetchData<T: Decodable>(_ api: API,  completionHandler: @escaping (T) -> Void) {
         var components = URLComponents()
@@ -39,7 +39,7 @@ class NetworkManager {
         
     }
     
-    private func fetchData<T: Decodable>(_ urlString: String,  completionHandler: @escaping (T) -> Void) {
+     func fetchData<T: Decodable>(_ urlString: String,  completionHandler: @escaping (T) -> Void) {
         guard let url = URL(string: urlString) else {
             print("invalid URL")
             return
@@ -49,7 +49,7 @@ class NetworkManager {
         fetchResponse(urlRequest, completionHandler: completionHandler)
     }
     
-    private func fetchResponse<T: Decodable>(_ urlRequest: URLRequest,  completionHandler: @escaping (T) -> Void) {
+     func fetchResponse<T: Decodable>(_ urlRequest: URLRequest,  completionHandler: @escaping (T) -> Void) {
             
         URLSession.shared.dataTask(with: urlRequest , completionHandler: {
             (data, resposone, error)-> Void in

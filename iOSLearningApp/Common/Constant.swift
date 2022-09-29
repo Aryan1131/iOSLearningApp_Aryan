@@ -28,8 +28,8 @@ struct APIConstants {
 struct ThemeConstants {
     static var PRIMARY_COLOR=UIColor.black
     static var SECONDARY_COLOR=UIColor.gray
-    static var PRIMARY_BG_COLOR=UIColor.black
-    static var SECONDARY_BG_COLOR=UIColor.white
+    static var PRIMARY_BG_COLOR=UIColor.white
+    static var SECONDARY_BG_COLOR=UIColor.black
     static var MARGIN:CGFloat=15
     static var CORNER_RADIUS:CGFloat=15
     static var IMAGE_WIDTH:CGFloat=100
@@ -46,11 +46,3 @@ struct UserDetailConstants {
     static var DETAIL_COUNT = 6
 }
 
-func Favourites(){
-    //let shared = Favourites()
-    
-    func getKeyForFavourites(userdId: String)->String {
-        return "favProfile\(userdId)"
-    }
-    
-}

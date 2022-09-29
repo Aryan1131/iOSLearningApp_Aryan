@@ -10,27 +10,34 @@ import UIKit
 import SnapKit
 
 class APIRequestListTableView : UITableViewCell{
+    private let usersListtitleLabel = UILabel()
+    private let usersListsubtitleLabel = UILabel()
+    let usersListprofileImageView = UIImageView()
+    private let usersListcontentLabel = UILabel()
+    private let usersListcontainerView = UIView()
+    let userFavButton = UIButton()
+    
+    var userId: String = ""
+    
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.UserListConfigure()
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    private let usersListtitleLabel = UILabel()
-    private let usersListsubtitleLabel = UILabel()
-    private let usersListprofileImageView = UIImageView()
-    private let usersListcontentLabel = UILabel()
-    private let usersListcontainerView = UIView()
-    let userFavButton = UIButton()
     
     
     
     func UserListConfigure(){
-        self.backgroundColor = .gray
+        self.backgroundColor = .white
+        userFavButton.addTarget(self, action: #selector(markUserFavButton), for:  .touchUpInside)
         SetUpusersListcontainerView()
         SetUpusersListprofileImageView()
+        
         SetUpusersListtitleLabel()
         SetUpusersListsubtitleLabel()
         SetUpusersListcontentLabel()
@@ -49,6 +56,19 @@ class APIRequestListTableView : UITableViewCell{
         usersListtitleLabel.text = item.user?.login
         usersListsubtitleLabel.text = item.title
         usersListcontentLabel.text = item.body
+        
+        
+        let network = NetworkManager()
+        userId = item.user?.login ?? ""
+        
+        if UserDefaults.standard.object(forKey: Favourites.shared.getKeyForFavourite(userdId: userId)) == nil{
+            userFavButton.setImage(UIImage(systemName: buttonSymbols.unfav), for: UIControl.State.normal)
+            userFavButton.addTarget(self, action: #selector(markUserFavButton), for: .touchUpInside)
+        }else{
+            userFavButton.setImage(UIImage(systemName: buttonSymbols.star), for:    UIControl.State.normal)
+            userFavButton.addTarget(self, action: #selector(unMarkUserFavButton), for: .touchUpInside)
+        }
+        
     }
     
 }
@@ -56,7 +76,7 @@ class APIRequestListTableView : UITableViewCell{
 private extension APIRequestListTableView{
     
     func SetUpusersListcontainerView(){
-        self.addSubview(usersListcontainerView)
+        self.contentView.addSubview(usersListcontainerView)
         usersListcontainerView.backgroundColor = .white
         usersListcontainerView.layer.cornerRadius = ThemeConstants.CORNER_RADIUS
         usersListcontainerView.layer.borderWidth = 1
@@ -87,7 +107,13 @@ private extension APIRequestListTableView{
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().offset(-1*ThemeConstants.MARGIN)
         })
-        userFavButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+        //userFavButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+        usersListsubtitleLabel.snp.makeConstraints({
+                    make in
+                    make.leading.equalTo(usersListprofileImageView.snp.trailing).offset(ThemeConstants.MARGIN)
+                    make.trailing.equalTo(userFavButton.snp.leading)
+                    make.top.equalTo(usersListtitleLabel.snp.bottom).offset(ThemeConstants.MARGIN)
+                })
     }
     
     func SetUpusersListtitleLabel(){
@@ -106,12 +132,12 @@ private extension APIRequestListTableView{
         usersListsubtitleLabel.font = UIFont.systemFont(ofSize: ThemeConstants.SUBTITLE_FONT_SIZE)
         usersListsubtitleLabel.numberOfLines = 0
         usersListsubtitleLabel.textColor = .blue
-        usersListsubtitleLabel.snp.makeConstraints({
-            make in
-            make.leading.equalTo(usersListprofileImageView.snp.trailing).offset(ThemeConstants.MARGIN)
-            make.trailing.equalToSuperview().offset(-1*ThemeConstants.MARGIN)
-            make.top.equalTo(usersListtitleLabel.snp.bottom).offset(ThemeConstants.MARGIN)
-        })
+//        usersListsubtitleLabel.snp.makeConstraints({
+//            make in
+//            make.leading.equalTo(usersListprofileImageView.snp.trailing).offset(ThemeConstants.MARGIN)
+//            make.trailing.equalTo(userFavButton.snp.leading)
+//            make.top.equalTo(usersListtitleLabel.snp.bottom).offset(ThemeConstants.MARGIN)
+//        })
     }
     // user top label
     func SetUpusersListcontentLabel(){
@@ -129,4 +155,19 @@ private extension APIRequestListTableView{
             make.bottom.equalToSuperview().priority(.low)
         })
     }
+    
+    @objc func markUserFavButton(){
+        print("list cell button clicked")
+        UserDefaults.standard.set("", forKey: Favourites.shared.getKeyForFavourite(userdId: userId))
+        //toggle image
+        
+        NotificationCenter.default.post(name: NSNotification.Name("observer"), object: nil)
+        
+    }
+    
+    @objc func unMarkUserFavButton(){
+        NotificationCenter.default.post(name: NSNotification.Name("observer"), object: nil)
+        UserDefaults.standard.removeObject(forKey: Favourites.shared.getKeyForFavourite(userdId: userId))
+    }
+    
 }

@@ -28,6 +28,7 @@ class UserDetailsViewController: UIViewController {
     init(user: User) {
         super.init(nibName: nil, bundle: nil)
         userDetails = user
+        userId = (userDetails?.login)!
     }
     
     required init?(coder: NSCoder) {
@@ -45,31 +46,11 @@ class UserDetailsViewController: UIViewController {
         guard let userDetails = userDetails else {
             return
         }
+        profileSave()
+        favouriteUserBotton()
+        bookmarkUserBotton()
+        //unBookmarkUserBotton()
         userDetailsViewModel.viewDidLoad(user: userDetails)
-        //        if(SaveProfileButton.image != UIImage(systemName: "bookmark.fill")){
-        //        SaveProfileButton.target = self
-        //        SaveProfileButton.action = #selector(clicktoSave)
-        //        SaveProfileButton.image = UIImage(systemName: "bookmark")
-        //        }else{
-        //            SaveProfileButton.image = UIImage(systemName: "bookmark.fill")
-        //        }
-        //        FavrouiteProfileButton.target = self
-        //        FavrouiteProfileButton.action = #selector(clickToAddToFavrouite)
-        //        FavrouiteProfileButton.image = UIImage(systemName: "star" )
-        /*
-         if UserDefaults.standard.object(forKey: "favourite\(String(describing: u_login))")==nil{
-         FavouriteButton.image = UIImage(systemName: "star")
-         }
-         else{
-         FavouriteButton.image = UIImage(systemName: "star.fill")
-         }
-         if UserDefaults.standard.object(forKey: u_login ?? "")==nil{
-         DownloadButton.image = UIImage(systemName: "square.and.arrow.down")
-         }
-         else{
-         DownloadButton.image = UIImage(systemName: "delete.forward.fill")
-         }
-         */
         
         if UserDefaults.standard.object(forKey: "favProfile\(String(describing: userId))") == nil{
             FavrouiteProfileButton.image = UIImage(systemName: "star")
@@ -93,6 +74,7 @@ class UserDetailsViewController: UIViewController {
     }
     @objc func clicktoSave(){
         do{
+            print("called clicktoSave")
             let encodeData = try JSONEncoder().encode(userDetails)
             guard let jsonString = String(data: encodeData,encoding: .utf8)else{
                 return
@@ -128,7 +110,7 @@ extension UserDetailsViewController: CommonViewLoadModel {
         userDetailsTableView.register(UserDetailsViewCell.self, forCellReuseIdentifier: "UserDetailsTableViewCell")
         userDetailsTableView.register(ProfileImageTableViewCell.self, forCellReuseIdentifier: "ProfileImageTableViewCell")
         userDetailsTableView.separatorStyle = .none
-        userDetailsTableView.backgroundColor = ThemeConstants.PRIMARY_BG_COLOR
+        userDetailsTableView.backgroundColor = ThemeConstants.SECONDARY_COLOR
         userDetailsTableView.layer.cornerRadius = ThemeConstants.CORNER_RADIUS
         //self.navigationItem.rightBarButtonItems = [FavrouiteProfileButton,SaveProfileButton]
         view.addSubview(userDetailsTableView)
@@ -186,12 +168,12 @@ extension UserDetailsViewController{
         SaveProfileButton.target = self
         SaveProfileButton.action = #selector(bookmarkUserBottonAction)
     }
-   
-    func unBookmarkUserBotton(){
-        SaveProfileButton.style = .plain
-        SaveProfileButton.target = self
-        SaveProfileButton.action = #selector(unBookmarkUserBottonAction)
-    }
+    
+        func unBookmarkUserBotton(){
+            SaveProfileButton.style = .plain
+            SaveProfileButton.target = self
+            SaveProfileButton.action = #selector(unBookmarkUserBottonAction)
+        }
     func favouriteUserBotton(){
         FavrouiteProfileButton.style = .plain
         FavrouiteProfileButton.target = self
@@ -199,6 +181,7 @@ extension UserDetailsViewController{
     }
     
     @objc func bookmarkUserBottonAction(){
+        
         guard let encodedData = try? JSONEncoder().encode(details) else {
             return
         }
@@ -206,6 +189,7 @@ extension UserDetailsViewController{
             return
         }
         if UserDefaults.standard.object(forKey: userId) == nil{
+            print("obcj bookmarkUserBottonAction \(userId)")
             UserDefaults.standard.set(JSONString, forKey: userId)
             SaveProfileButton.image = UIImage(systemName: "bookmark.fill")
             let alertMessage = UIAlertController(title: "Bookmark`", message: "Profile Bookmarked", preferredStyle: .alert)
@@ -215,26 +199,27 @@ extension UserDetailsViewController{
             DispatchQueue.main.asyncAfter(deadline: when) {
                 alertMessage.dismiss(animated: true ,completion: nil)
             }
-        }else{
+        }
+        else{
             print("want to unbookmark the user")
             unBookmarkUserBottonAction()
         }
     }
     
     @objc func unBookmarkUserBottonAction(){
-        if UserDefaults.standard.objectIsForced(forKey: userId) == nil{
+        if UserDefaults.standard.object(forKey: userId) == nil{
             return
         }else{
-            let alertMessage = UIAlertController(title: "Bookmarked", message: "Want to bookaark this user", preferredStyle: .alert)
+            let alertMessage = UIAlertController(title: "Bookmarked", message: "Want to bookmark this user", preferredStyle: .alert)
             let okButton = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
                 UserDefaults.standard.removeObject(forKey: self.userId)
                 self.SaveProfileButton.image = UIImage(systemName: "bookmark")
                 let alterMsg = UIAlertController(title: "Un Bookmarked", message: "User profile has been removed from bookmarked", preferredStyle: .alert)
-                self.present(alertMessage, animated: true, completion: nil)
+                self.present(alterMsg, animated: true, completion: nil)
                 
-                let when = DispatchTime.now()
+                let when = DispatchTime.now() + 1
                 DispatchQueue.main.asyncAfter(deadline: when){
-                    alertMessage.dismiss(animated: true,completion: nil)
+                    alterMsg.dismiss(animated: true,completion: nil)
                 }
             })
             let cancelButton = UIAlertAction(title: "Cancel", style: .cancel){

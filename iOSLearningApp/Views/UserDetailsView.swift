@@ -27,6 +27,7 @@ class UserDetailsViewCell : UITableViewCell{
         self.backgroundColor = .white
         setupKeyLabel()
         setupValueLabel()
+        //setData()
     }
     func setDataUserDetailsViewCell(key: String, value: String){
         keyLabel.text = key

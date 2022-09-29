@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SnapKit
+import XCTest
 
 
 class APIRequestListViewController : UIViewController {
@@ -16,7 +17,11 @@ class APIRequestListViewController : UIViewController {
     var requestResponse : [APIRequest] = []
     let requestListTableView = UITableView()
     let requestViewModel = APIRequestListViewModel()
+    let userFavButton = UIButton()
     let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+    
+    var userId: String = ""
+    
     init() {
         super.init(nibName: nil, bundle: nil)
     }
@@ -31,11 +36,18 @@ class APIRequestListViewController : UIViewController {
         navigationController?.navigationBar.isTranslucent = false
         self.title = ThemeConstants.TABLE_VIEW_TITLE
         self.navigationController?.navigationBar.backgroundColor = .gray
-        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.layer.cornerRadius = ThemeConstants.CORNER_RADIUS
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         requestViewModel.APIRequestView = self
         requestViewModel.viewDidLoad()
+        let reloadTable:(Notification)->Void = {make in
+            //self.tableView.reloadData()
+            self.requestListTableView.reloadData()
+        }
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("observer"), object: nil, queue: nil, using: reloadTable)
+        
+        
     }
     
     func setupMainActivityIndicator(){
@@ -46,6 +58,35 @@ class APIRequestListViewController : UIViewController {
             make.top.bottom.trailing.leading.equalToSuperview()
         })
     }
+//    func setData(data: User?) ->String{
+//        guard let avatarUrl = data?.avatar_url else{
+//            return ""
+//        }
+//        let setImage = {(data: Data) -> Void in
+//            guard let image = UIImage(data: data) else{
+//                return
+//            }
+//            //self.refAPIRequest.usersListprofileImageView.image = image
+//            let network = NetworkManager()
+//            //network.fetchImage(urlString: avatarUrl, completionHandler: setImage)
+//
+//        }
+//        userId = data?.login ?? ""
+//        //print("usedId\(userId)")
+//        if UserDefaults.standard.object(forKey: Favourites.shared.getKeyForFavourite(userdId: userId)) == nil{
+//            userFavButton.setImage(UIImage(systemName: buttonSymbols.unfav), for: UIControl.State.normal)
+//            userFavButton.addTarget(self, action: #selector(markUserFavButton), for:  .touchUpInside)
+//        }else{
+//            userFavButton.setImage(UIImage(systemName: buttonSymbols.star), for:    UIControl.State.normal)
+//            userFavButton.addTarget(self, action: #selector(unMarkUserFavButton), for: .touchUpInside)
+//        }
+//        return data?.login ?? ""
+//    }
+    
+    
+    
+    
+    
     
 }
 extension APIRequestListViewController: CommonViewLoadModel{
@@ -119,5 +160,7 @@ extension APIRequestListViewController: UITableViewDataSource, UITableViewDelega
         }
     }
     
+    
+    //let refAPIRequest = APIRequestListTableView()
     
 }
