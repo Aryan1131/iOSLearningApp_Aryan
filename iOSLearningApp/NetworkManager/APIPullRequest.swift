@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import AYNetworkManager
+
 
 struct APIPullRequest : API {
     let PageNumber: Int

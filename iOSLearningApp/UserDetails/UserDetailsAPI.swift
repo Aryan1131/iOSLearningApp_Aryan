@@ -6,6 +6,8 @@
 //
 // MARK: 35 no empty line after import ->DONE
 import Foundation
+import AYNetworkManager
+
 struct UserDetailApi: API {
     let username: String
         

@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import AYNetworkManager
+
 
 class pullRequestViewCell {
     // MARK: 11  try to make everything private ->DONE

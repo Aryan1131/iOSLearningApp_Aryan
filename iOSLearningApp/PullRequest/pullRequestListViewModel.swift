@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import AYNetworkManager
+import AYUserDefaultsManager
 
 class pullRequestListViewModel: UITableViewCell {
     
@@ -143,7 +145,9 @@ private extension pullRequestListViewModel {
     // MARK: 9  objc should be in seperate line ->DONE
     @objc
     func markUserFavButton() {
-        UserDefaults.standard.set("", forKey: Favourites.shared.getKeyForFavourite(userdId: userId))
+        //UserDefaults.standard.set("", forKey: Favourites.shared.getKeyForFavourite(userdId: userId))
+        UserDefaultsManager.shared.saveData(Value: "",
+                                            Key: Favourites.shared.getKeyForFavourite(userdId: userId))
         NotificationCenter.default.post(name: NSNotification.Name(notificationConstants.Observer), object: nil)
     }
     
@@ -151,6 +155,7 @@ private extension pullRequestListViewModel {
     @objc
     func unMarkUserFavButton() {
         NotificationCenter.default.post(name: NSNotification.Name(notificationConstants.Observer), object: nil)
-        UserDefaults.standard.removeObject(forKey: Favourites.shared.getKeyForFavourite(userdId: userId))
+        //UserDefaults.standard.removeObject(forKey: Favourites.shared.getKeyForFavourite(userdId: userId))
+        UserDefaultsManager.shared.deletedata(Key: Favourites.shared.getKeyForFavourite(userdId: userId))
     }
 }

@@ -7,6 +7,8 @@
 import Foundation
 import UIKit
 import SnapKit
+import AYNetworkManager
+
 
 class userDetailController {
     
