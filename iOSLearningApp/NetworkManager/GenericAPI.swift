@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 protocol API {
     var scheme: String { get }
     var baseUrl: String { get }

@@ -9,14 +9,14 @@ import Foundation
 import UIKit
 import SnapKit
 
-class ProfileImageTableViewCell: UITableViewCell {
+class profileImageTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.configure()
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented inside ProfileImageView init")
+        fatalError(errorConstants.fatalerror)
     }
     
     private let profileImageView = UIImageView()
@@ -38,7 +38,8 @@ class ProfileImageTableViewCell: UITableViewCell {
     
 
     func setData(imageUrl: String) {
-        profileImageView.image = UIImage(named: "user")
+        // MARK: 37 string in code ->Done
+        profileImageView.image = UIImage(named: userDetailConstants.USER)
         NetworkManager.shared.fetchImage(urlString: imageUrl, completionHandler: {
             img in
             self.profileImageView.image = img

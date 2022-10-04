@@ -5,14 +5,14 @@
 //  Created by Aryan Yadav on 27/09/22.
 //
 
-
-
 import Foundation
 import UIKit
 
-public class NetworkManager {
+// MARK: 43 singleton class should be final->DONE
+public final class NetworkManager {
     static let shared = NetworkManager()
-    init() {}
+    // MARK: 42 init should be private -> showing error
+    private init() {}
     
     func fetchData<T: Decodable>(_ api: API,  completionHandler: @escaping (T) -> Void) {
         var components = URLComponents()
@@ -30,7 +30,6 @@ public class NetworkManager {
         components.queryItems = urlQueryItems
         
         guard let url = components.url else {
-            print("invalid URL")
             return
         }
         let urlRequest = URLRequest(url: url)
@@ -41,7 +40,6 @@ public class NetworkManager {
     
      func fetchData<T: Decodable>(_ urlString: String,  completionHandler: @escaping (T) -> Void) {
         guard let url = URL(string: urlString) else {
-            print("invalid URL")
             return
         }
         let urlRequest = URLRequest(url: url)
@@ -50,15 +48,13 @@ public class NetworkManager {
     }
     
      func fetchResponse<T: Decodable>(_ urlRequest: URLRequest,  completionHandler: @escaping (T) -> Void) {
-            
-        URLSession.shared.dataTask(with: urlRequest , completionHandler: {
+         // MARK: 47 improper spacing for ,->DONE
+        URLSession.shared.dataTask(with: urlRequest, completionHandler: {
             (data, resposone, error)-> Void in
             if error != nil {
-                print(error ?? "error")
                 return
             }
             guard let data = data else {
-                print("Data does not exist")
                 return
             }
             if let object = try? JSONDecoder().decode(T.self, from: data) {
@@ -66,21 +62,20 @@ public class NetworkManager {
                     completionHandler(object)
                 })
             } else {
-                print("Invalid data format")
+                // MARK: 44 print and string in code ->DONE
+                print(errorConstants.error)
             }
         }).resume()
     }
     
     func fetchImage(urlString: String, completionHandler: @escaping (UIImage)->()) {
         guard let url = URL(string: urlString) else {
-            print("invalid URL")
             return
         }
 
         URLSession.shared.dataTask(with: url, completionHandler: {
             (data, response, error) -> Void in
                 if error != nil {
-                    print(error ?? "error")
                     return
                 }
             guard let data = data else {

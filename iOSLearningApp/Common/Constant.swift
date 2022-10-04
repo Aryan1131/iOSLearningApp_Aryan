@@ -38,11 +38,43 @@ struct ThemeConstants {
     static var TITLE_FONT_SIZE:CGFloat=16
     static var SUBTITLE_FONT_SIZE:CGFloat=10
     static var TABLE_VIEW_TITLE="API Requests"
+    static var SPINNER_DIAMETER = 2
     
 }
 
 
-struct UserDetailConstants {
+struct userDetailConstants {
     static var DETAIL_COUNT = 6
+    static var USER = "user"
 }
 
+struct notificationConstants {
+    static var Observer = "observer"
+    static var Listener = "listiner"
+}
+
+struct alertConstants {
+    static var cancel = "cancel"
+    static var ok = "OK"
+    static var bookmarkAlertTitle = "Bookmarked"
+    static var bookmarkAlertMessage = "Want to bookmark this user ?"
+    static var unMarkAlertTitle = "Un-Marked"
+    static var unMarkAltertMessage = "User profile removed from bookmark"
+    static var bookmarkTitle = "Bookmark"
+}
+
+struct userResponseConstants {
+    static var name = "Name"
+    static var email = "Email"
+    static var type = "Type"
+    static var company = "Company"
+    static var number_of_repos = "Number of Repos"
+    static var number_of_follower = "Follower Counts"
+    static var number_of_following = "Following Counts"
+}
+
+struct errorConstants {
+    static var fatalerror = "init(coder:) has not been implemented"
+    static var error = "Error"
+    static var encodeFailError = "Failed to encode data"
+}

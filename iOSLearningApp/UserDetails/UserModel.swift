@@ -4,11 +4,10 @@
 //
 //  Created by Aryan Yadav on 27/09/22.
 //
+// MARK: 36 space between import lines ->DONE
 
 import Foundation
-
 import UIKit
-
 struct User: Decodable, Encodable {
     let id: Double?
     let login: String?

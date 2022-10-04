@@ -8,11 +8,10 @@
 import Foundation
 
 class Favourites {
-    static let shared = Favourites()
+    // MARK: 41 no space before function->DONE
     private init() { }
-    
+    static let shared = Favourites()
     func getKeyForFavourite(userdId: String)-> String {
-       // print("favProfile\(userdId)")
         return "favProfile\(userdId)"
     }
     

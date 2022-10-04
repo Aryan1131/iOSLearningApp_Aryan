@@ -8,47 +8,48 @@ import Foundation
 import UIKit
 import SnapKit
 
-class UserDetailsViewModel {
+class userDetailController {
+    
     var userDetailsViewModelDelegate: (CommonViewLoadModel)?
-    var userDetails: User? = nil
-    var cellViewModels: [cellModel] = []
+    private var userDetails: User? = nil
+    private var cellViewModels: [cellModel] = []
     
     func setResponseData() {
-        if let name = userDetails?.name{
-            let model = cellModel(leftLabel: "Name", rightLabel: name)
+        if let name = userDetails?.name {
+            let model = cellModel(leftLabel: userResponseConstants.name, rightLabel: name)
             cellViewModels.append(model)
         }
         
-        if let email = userDetails?.email{
-            let model = cellModel(leftLabel: "Email", rightLabel: email)
+        if let email = userDetails?.email {
+            let model = cellModel(leftLabel: userResponseConstants.email, rightLabel: email)
             cellViewModels.append(model)
         }
         
-        if let type = userDetails?.type{
-            let model = cellModel(leftLabel: "Type", rightLabel: type)
+        if let type = userDetails?.type {
+            let model = cellModel(leftLabel: userResponseConstants.type, rightLabel: type)
             cellViewModels.append(model)
         }
         
-        if let company = userDetails?.company{
-            let model = cellModel(leftLabel: "Company", rightLabel: company)
+        if let company = userDetails?.company {
+            let model = cellModel(leftLabel: userResponseConstants.company, rightLabel: company)
             cellViewModels.append(model)
         }
         
         if let repos = userDetails?.public_repos {
-            let model = cellModel(leftLabel: "Number of Repos", rightLabel: String(repos))
+            let model = cellModel(leftLabel: userResponseConstants.number_of_repos, rightLabel: String(repos))
             cellViewModels.append(model)
         }
         if let followers = userDetails?.followers {
-            let model = cellModel(leftLabel: "Followers Count", rightLabel: String(followers))
+            let model = cellModel(leftLabel: userResponseConstants.number_of_follower, rightLabel: String(followers))
             cellViewModels.append(model)
         }
-        if let following = userDetails?.following{
-            let model = cellModel(leftLabel: "Following count", rightLabel: String(following))
+        if let following = userDetails?.following {
+            let model = cellModel(leftLabel: userResponseConstants.number_of_following, rightLabel: String(following))
             cellViewModels.append(model)
         }
-        
     }
-    func viewDidLoad(user: User){
+    
+    func viewDidLoad(user: User) {
         userDetailsViewModelDelegate?.showLoader(true)
         if let userName = user.login{
             NetworkManager.shared.fetchData(UserDetailApi(username: userName),completionHandler:{
@@ -56,7 +57,7 @@ class UserDetailsViewModel {
                 self.userDetails = userResponse
                 self.setResponseData()
                 self.userDetailsViewModelDelegate?.showLoader(false)
-                self.userDetailsViewModelDelegate?.TableViewSetUp()
+                self.userDetailsViewModelDelegate?.tableViewSetUp()
                 self.userDetailsViewModelDelegate?.showData(self.cellViewModels as Any)
             })
         }

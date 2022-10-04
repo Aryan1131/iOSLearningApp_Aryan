@@ -6,33 +6,30 @@
 //
 
 import Foundation
-import UIKit
 
-class APIRequestListViewModel{
+class pullRequestViewCell {
+    // MARK: 11  try to make everything private ->DONE
     var APIRequestView: (CommonViewLoadModel)?
-    var APIRequestResponse: [APIRequest] = []
-    var PageNumber = 1
+    private var APIRequestResponse: [pullRequest] = []
+    private var PageNumber = 1
     
-    func viewDidLoad(){
+    func viewDidLoad() {
         APIRequestView?.showLoader(true)
         NetworkManager.shared.fetchData(APIPullRequest(PageNumber: PageNumber), completionHandler: {
-            (apiRequestData: [APIRequest]) in
+            (apiRequestData: [pullRequest]) in
             self.APIRequestResponse += apiRequestData
             self.APIRequestView?.showLoader(false)
-            print(" inside APIRequestListViewModel func APIRequestListViewModelviewDidLoad")
             if(self.PageNumber == 1) {
-                self.APIRequestView?.TableViewSetUp()
+                self.APIRequestView?.tableViewSetUp()
             }
             self.APIRequestView?.showData(self.APIRequestResponse)
             self.PageNumber += 1
-            
         })
-        
     }
     
-    func APIRequestListViewModelreachedBottom(){
+    func APIRequestListViewModelReachedBottom() {
         NetworkManager.shared.fetchData(APIPullRequest(PageNumber: PageNumber), completionHandler: {
-            (apiRequestData: [APIRequest]) in
+            (apiRequestData: [pullRequest]) in
             self.APIRequestResponse += apiRequestData
             print(self.APIRequestResponse.count)
             self.APIRequestView?.showData(self.APIRequestResponse)

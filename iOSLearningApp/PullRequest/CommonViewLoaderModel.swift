@@ -6,12 +6,10 @@
 //
 
 import Foundation
-import UIKit
-import SnapKit
-
-protocol CommonViewLoadModel: AnyObject{
+// MARK: 1. space ->DONE
+protocol CommonViewLoadModel: AnyObject {
     func showLoader(_ show: Bool)
     func showError()
     func showData(_ show: Any)
-    func TableViewSetUp()    
+    func tableViewSetUp()    
 }

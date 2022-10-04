@@ -4,7 +4,7 @@
 //
 //  Created by Aryan Yadav on 27/09/22.
 //
-
+// MARK: 35 no empty line after import ->DONE
 import Foundation
 struct UserDetailApi: API {
     let username: String

@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct APIPullRequest : API {
     let PageNumber: Int
     let PageSize: Int = APIConstants.PULL_REQUEST_PAGE_SIZE

@@ -10,17 +10,18 @@ import UIKit
 import SnapKit
 
 class LoaderTableViewCell: UITableViewCell {
+    
+    private var activityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.configureLoaderTableViewCell()
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(errorConstants.fatalerror)
     }
     
-    private var activityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
-
     private func configureLoaderTableViewCell () {
         self.backgroundColor = .darkGray
         activityIndicatorView.color = ThemeConstants.PRIMARY_BG_COLOR
@@ -32,7 +33,8 @@ class LoaderTableViewCell: UITableViewCell {
     }
     
     func showLoader(_ show: Bool) {
-        if(show == true) {
+        // MARK: 18 paranthesis not required ->ASK Showing error
+        if show == true {
             activityIndicatorView.startAnimating()
         } else {
             activityIndicatorView.stopAnimating()
