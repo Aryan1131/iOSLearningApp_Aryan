@@ -7,14 +7,15 @@
 
 import Foundation
 import UIKit
+//import AYNetworkManager
 
 // MARK: 43 singleton class should be final->DONE
-public final class NetworkManager {
-    static let shared = NetworkManager()
+public class NetworkManager {
+    public static let shared = NetworkManager()
     // MARK: 42 init should be private -> showing error
     private init() {}
     
-    func fetchData<T: Decodable>(_ api: API,  completionHandler: @escaping (T) -> Void) {
+    public func fetchData<T: Decodable>(_ api: API,  completionHandler: @escaping (T) -> Void) {
         var components = URLComponents()
         components.scheme = api.scheme
         components.host = api.baseUrl
@@ -38,7 +39,7 @@ public final class NetworkManager {
         
     }
     
-     func fetchData<T: Decodable>(_ urlString: String,  completionHandler: @escaping (T) -> Void) {
+    public func fetchData<T: Decodable>(_ urlString: String,  completionHandler: @escaping (T) -> Void) {
         guard let url = URL(string: urlString) else {
             return
         }
@@ -47,7 +48,7 @@ public final class NetworkManager {
         fetchResponse(urlRequest, completionHandler: completionHandler)
     }
     
-     func fetchResponse<T: Decodable>(_ urlRequest: URLRequest,  completionHandler: @escaping (T) -> Void) {
+    public func fetchResponse<T: Decodable>(_ urlRequest: URLRequest,  completionHandler: @escaping (T) -> Void) {
          // MARK: 47 improper spacing for ,->DONE
         URLSession.shared.dataTask(with: urlRequest, completionHandler: {
             (data, resposone, error)-> Void in
@@ -63,12 +64,12 @@ public final class NetworkManager {
                 })
             } else {
                 // MARK: 44 print and string in code ->DONE
-                print(errorConstants.error)
+                //print(errorConstants.error)
             }
         }).resume()
     }
     
-    func fetchImage(urlString: String, completionHandler: @escaping (UIImage)->()) {
+    public func fetchImage(urlString: String, completionHandler: @escaping (UIImage)->()) {
         guard let url = URL(string: urlString) else {
             return
         }

@@ -1,0 +1,21 @@
+PODS:
+  - AYNetworkManager (3.1.0)
+  - AYUserDefaultsManager (3.1.0)
+
+DEPENDENCIES:
+  - AYNetworkManager (from `AYNetworkManager/`)
+  - AYUserDefaultsManager (from `AYUserDefaultsManager/`)
+
+EXTERNAL SOURCES:
+  AYNetworkManager:
+    :path: AYNetworkManager/
+  AYUserDefaultsManager:
+    :path: AYUserDefaultsManager/
+
+SPEC CHECKSUMS:
+  AYNetworkManager: f6702f35b8a8cf969189276d2938689d46e40b78
+  AYUserDefaultsManager: 1836c53fe718cc2d3516cdc1cc0332e5dca6fa07
+
+PODFILE CHECKSUM: c0a60cb310e20e043f754981f2861b2a6f7b30a9
+
+COCOAPODS: 1.11.3

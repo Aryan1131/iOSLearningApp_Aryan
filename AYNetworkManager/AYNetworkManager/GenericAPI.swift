@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol API {
+public protocol API {
     var scheme: String { get }
     var baseUrl: String { get }
     var path: String { get }
@@ -17,12 +17,15 @@ protocol API {
     var body: [String: String]? { get }
 }
 
-extension API {
+public extension API {
     var scheme: String {
-        return APIConstants.SCHEME
+        return "http"
+        //MARK: Need to clean
+        //return "APIConstants.SCHEME"
     }
     var baseUrl: String {
-        return APIConstants.BASE_URL
+        return "api.github.com"
+        //return "APIConstants.BASE_URL"
     }
     var method: HTTPMethod {
         return .GET
@@ -34,3 +37,12 @@ extension API {
         return nil
     }
 }
+
+public enum HTTPMethod: String {
+    case GET
+    case POST
+    case PUT
+    case PATCH
+    case DELETE
+}
+

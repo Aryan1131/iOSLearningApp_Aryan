@@ -51,13 +51,13 @@ class userDetailsViewModels: UIViewController {
         userDetailsViewModel.viewDidLoad(user: userDetails)
         
         // MARK: 20 no space after nil ->DONE
-        if UserDefaultsManager.shared.getData(Key: "favProfile\(String(describing: userId))") == nil {
+        if UserDefaultsManager.shared.getData(Key: "favProfile\(String(describing: userId))") == false {
             favrouiteProfileButton.image = UIImage(systemName: buttonSymbols.unstar)
         } else {
             favrouiteProfileButton.image = UIImage(systemName: buttonSymbols.star)
         }
         // MARK: 52 warnings
-        if UserDefaultsManager.shared.getData(Key: userId) == nil {
+        if UserDefaultsManager.shared.getData(Key: userId) == false {
             saveProfileButton.image = UIImage(systemName: buttonSymbols.unmark)
         } else {
             saveProfileButton.image = UIImage(systemName: buttonSymbols.bookmark)
@@ -184,7 +184,7 @@ private extension userDetailsViewModels {
         guard let JSONString = String(data: encodedData, encoding: .utf8) else{
             return
         }
-        if UserDefaultsManager.shared.getData(Key: userId) == nil {
+        if UserDefaultsManager.shared.getData(Key: userId) == false{
             UserDefaultsManager.shared.saveData(Value: JSONString, Key: userId)
             saveProfileButton.image = UIImage(systemName: buttonSymbols.bookmark)
             // MARK: 30 string in code
@@ -204,7 +204,7 @@ private extension userDetailsViewModels {
     // MARK: 51 objc in seperate line ->DONE
     @objc
     func unBookmarkUserBottonAction() {
-        if UserDefaultsManager.shared.getData(Key: userId) == nil {
+        if UserDefaultsManager.shared.getData(Key: userId) == false {
             return
         } else {
             // MARK: 31 string in code
@@ -242,7 +242,7 @@ private extension userDetailsViewModels {
     func favouriteUserBottonAction() {
         let data: String = ""
         // MARK: 34 string in code
-        if UserDefaultsManager.shared.getData(Key: "favProfile\(userId)") == nil {
+        if UserDefaultsManager.shared.getData(Key: "favProfile\(userId)") == false {
             UserDefaultsManager.shared.saveData(Value: data, Key: "favProfile\(userId)")
             favrouiteProfileButton.image = UIImage(systemName:buttonSymbols.star)
         } else {

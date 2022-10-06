@@ -1,0 +1,6 @@
+framework module AYUserDefaultsManager {
+  umbrella header "AYUserDefaultsManager-umbrella.h"
+
+  export *
+  module * { export * }
+}

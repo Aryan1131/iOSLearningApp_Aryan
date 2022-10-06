@@ -1,0 +1,6 @@
+framework module AYNetworkManager {
+  umbrella header "AYNetworkManager-umbrella.h"
+
+  export *
+  module * { export * }
+}

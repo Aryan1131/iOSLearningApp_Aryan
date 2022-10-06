@@ -1,0 +1,27 @@
+{
+  "name": "AYNetworkManager",
+  "version": "3.1.0",
+  "license": {
+    "type": "BSD"
+  },
+  "homepage": "https://github.com/tonymillion/Reachability",
+  "authors": {
+    "Aryan Yadav": "aryanyadav@navi.com"
+  },
+  "summary": "ARC and GCD Compatible Reachability Class for iOS and OS X.",
+  "source": {
+    "git": "https://github.com/tonymillion/Reachability.git",
+    "tag": "v3.1.0"
+  },
+  "source_files": [
+    "AYNetworkManager",
+    "AYNetworkManager/**/*.{swift,xib}"
+  ],
+  "frameworks": "SystemConfiguration",
+  "platforms": {
+    "osx": null,
+    "ios": null,
+    "tvos": null,
+    "watchos": null
+  }
+}
